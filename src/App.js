@@ -19,23 +19,23 @@ class App extends Component {
     this.setState({yogaClasses});
   }
 
-  handleAddClass = async newPupData => {
-    const newPup = await yogaClassAPI.create(newPupData);
+  handleAddClass = async newYogaClassData => {
+    const newYogaClass = await yogaClassAPI.create(newYogaClassData);
     this.setState(state => ({
-      yogaClasses: [...state.yogaClasses, newPup]
+      yogaClasses: [...state.yogaClasses, newYogaClass]
     }),
     // Using cb to wait for state to update before rerouting
     () => this.props.history.push('/'));
-  }
+  }//////////////////////
 
-  handleUpdateClass = async updatedPupData => {
-    const updatedClass = await yogaClassAPI.update(updatedPupData);
+  handleUpdateClass = async updatedYogaClassData => {
+    const updatedClass = await yogaClassAPI.update(updatedYogaClassData);
     // Using map to replace just the yogaClass that was updated
-    const newPuppiesArray = this.state.yogaClasses.map(p => 
+    const newYogaClassesArray = this.state.yogaClasses.map(p => 
       p._id === updatedClass._id ? updatedClass : p
     );
     this.setState(
-      {yogaClasses: newPuppiesArray},
+      {yogaClasses: newYogaClassesArray},
       // This cb function runs after state is updated
       () => this.props.history.push('/')
     );
@@ -51,12 +51,12 @@ class App extends Component {
   
   render() {
     return (
-      <div yogaClassName="App">
-        <header yogaClassName="App-header">
-          React Puppies CRUD
+      <div className="App">
+        <header className="App-header">
+          Courtney's Yoga
           <nav>
             <NavLink exact to='/'>
-              PUPPIES LIST
+              My Classes
             </NavLink>
             <NavLink exact to='/add'>
               Add Class

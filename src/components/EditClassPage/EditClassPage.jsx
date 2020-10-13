@@ -24,43 +24,70 @@ class EditClassPage extends Component {
      <>
        <h1>Edit Class</h1>
        <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-         <div yogaClassName="form-group">
-           <label>Pup's Name (required)</label>
+         <div className="form-group">
+           <label>Class Name: </label>
            <input
-             yogaClassName="form-control"
-             name="name"
-             value={this.state.formData.name}
+             className="form-control"
+             name="title"
+             value={this.state.formData.title}
              onChange={this.handleChange}
              required
            />
          </div>
-         <div yogaClassName="form-group">
-           <label>Pup's Breed (required)</label>
+         <div className="form-group">
+           <label>Date and Time: </label>
            <input
-             yogaClassName="form-control"
-             name="breed"
-             value={this.state.formData.breed}
+             className="form-control"
+             name="dateTime"
+             value={this.state.formData.dateTime}
              onChange={this.handleChange}
              required
            />
          </div>
-         <div yogaClassName="form-group">
-           <label>Pup's Age</label>
+         <div className="form-group">
+           <label>Instructor: </label>
            <input
-             yogaClassName="form-control"
-             name="age"
-             value={this.state.formData.age}
+             className="form-control"
+             name="instructor"
+             value={this.state.formData.instructor}
              onChange={this.handleChange}
            />
          </div>
+         <div className="form-group">
+           <label>Description: </label>
+           <textarea
+             className="form-control"
+             name="description"
+             value={this.state.formData.description}
+             onChange={this.handleChange}
+           />
+         </div>
+         <div className="form-group">
+           <label>Class Size: </label>
+           <input
+             className="form-control"
+             name="yogaClassSize"
+             value={this.state.formData.yogaClassSize}
+             onChange={this.handleChange}
+           />
+         </div>
+         <div className="form-group">
+           <label>Price: </label>
+           <input
+             className="form-control"
+             name="price"
+             value={this.state.formData.price}
+             onChange={this.handleChange}
+           />
+         </div>
+
          <button
            type="submit"
-           yogaClassName="btn btn-xs"
+           className="btn"
            disabled={this.state.invalidForm}
          >
-           SAVE PUPPY
-         </button>&nbsp;&nbsp;
-         <Link to='/'>CANCEL</Link>
+           SAVE CHANGES
+         </button>
        </form>
      </>
    );

@@ -1,4 +1,27 @@
 .ClassListItem-action-panel {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .panel-title-bold {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    padding: 0px;
+    margin: 10px;
+  }
+
+  .panel {
+    min-width: 300px;
+  }
+
+  .ClassListPage-grid {
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }

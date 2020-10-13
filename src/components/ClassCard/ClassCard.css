@@ -1,0 +1,11 @@
+.inline {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+
+}
+
+.panel-default {
+    max-width: 50%;
+}

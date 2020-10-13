@@ -5,8 +5,8 @@ function ClassListPage(props) {
   return (
     <>
       <h1>Class List</h1>
-      <div yogaClassName="ClassListPage-grid">
-        {props.yogaClasses.map(yogaClass => (
+      <div className="ClassListPage-grid">
+        {props.yogaClasses.sort((a,b) => b.dateTime - a.dateTime).map(yogaClass => (
           <ClassListItem 
             yogaClass={yogaClass} 
             key={yogaClass._id} 
@@ -18,3 +18,4 @@ function ClassListPage(props) {
   );
 }
 export default ClassListPage;
+
