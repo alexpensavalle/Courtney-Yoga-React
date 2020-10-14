@@ -25,3 +25,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
+
+  .inline { /*wtf doesnt this workkkkkkkkk*/
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
