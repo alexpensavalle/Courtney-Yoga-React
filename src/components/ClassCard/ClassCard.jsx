@@ -16,6 +16,7 @@ function ClassCard({yogaClass}) {
             <dt>Date:&nbsp;</dt>
             <dd>{moment(yogaClass.dateTime).format('DD MMM, YYYY')}</dd>
           </div>
+          
           <div className='inline' >
             <dt>Instructor:&nbsp;</dt>
             <dd>{yogaClass.instructor}</dd>

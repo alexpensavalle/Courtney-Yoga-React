@@ -7,11 +7,20 @@ import ClassListPage from './components/ClassListPage/ClassListPage';
 import AddClassPage from './components/AddClassPage/AddClassPage';
 import ClassDetailPage from './components/ClassDetailPage/ClassDetailPage';
 import EditClassPage from './components/EditClassPage/EditClassPage';
+import userService from './utils/userService';
+import tokenService from './utils/tokenService';
+
 
 class App extends Component {
-  state = {
-    yogaClasses: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      ...this.getInitialState(),
+      yogaClasses: [],
+      // Initialize user if there's a token, otherwise null
+      user: userService.getUser()
+    };
+  }
   
   //Runs everytime after render() is called
   async componentDidMount() {
