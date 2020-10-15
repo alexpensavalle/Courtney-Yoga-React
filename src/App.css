@@ -23,3 +23,9 @@
   color: var(--secondary-dark);
   margin-bottom: 5vmin;
 }
+
+.inline { /*wtf doesnt this workkkkkkkkk*/
+  display: inline-block;
+  justify-content: flex-start;
+  padding: 10px;
+}

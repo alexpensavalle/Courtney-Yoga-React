@@ -11,6 +11,7 @@ function ClassListPage(props) {
             yogaClass={yogaClass} 
             key={yogaClass._id} 
             handleDeleteClass={props.handleDeleteClass}
+            user={props.user}
             />
         ))} 
       </div>

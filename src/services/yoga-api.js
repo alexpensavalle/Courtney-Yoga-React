@@ -10,7 +10,7 @@ export function create(yogaClass) {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify(yogaClass)
-  }).then(res => res.json());
+  }).then(res => res.json()); 
 }
 
 export function update(yogaClass) {

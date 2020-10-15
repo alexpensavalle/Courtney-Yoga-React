@@ -8,7 +8,7 @@ class LoginPage extends Component {
   state = {
     email: '',
     pw: ''
-  };
+  }; 
 
   handleChange = (e) => {
     this.setState({
@@ -35,6 +35,7 @@ class LoginPage extends Component {
     return (
       <div className="LoginPage">
         <header className="header-footer">Log In</header>
+        <br></br>
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <div className="form-group">
             <div className="col-sm-12">

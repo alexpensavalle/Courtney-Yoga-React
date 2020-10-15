@@ -1,15 +1,18 @@
 var mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 
 const SALT_ROUNDS = 6;
 
-var userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: String,
+  password: String,
   email: String,
-  position: {
-    type: String,
-    default: 'student'
+  isAdmin: {
+    type: Boolean,
+    default: 'false'
   },
+  signups: [{type: Schema.Types.ObjectId, href:'User'}]
 }, 
 
 {timestamps: true}

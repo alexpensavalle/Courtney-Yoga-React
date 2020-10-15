@@ -7,15 +7,14 @@ import ClassListPage from './components/ClassListPage/ClassListPage';
 import AddClassPage from './components/AddClassPage/AddClassPage';
 import ClassDetailPage from './components/ClassDetailPage/ClassDetailPage';
 import EditClassPage from './components/EditClassPage/EditClassPage';
+import SignupPage from './pages/SignupPage/SignupPage.jsx';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import userService from './utils/userService';
-import tokenService from './utils/tokenService';
-
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      ...this.getInitialState(),
       yogaClasses: [],
       // Initialize user if there's a token, otherwise null
       user: userService.getUser()
@@ -57,29 +56,74 @@ class App extends Component {
       yogaClasses: state.yogaClasses.filter(p => p._id !== id)
     }), () => this.props.history.push('/'));
   }
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
   
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          Courtney's Yoga
-          <nav>
-            <NavLink exact to='/'>
-              My Classes
-            </NavLink>
-            <NavLink exact to='/add'>
-              Add Class
-            </NavLink>
-          </nav>
+          <NavLink exact to='/home'>Courtney's Yoga</NavLink>
+
+
+
+          {this.state.user ?
+              <div>
+                
+                <span className="inline">Welcome, {this.state.user.name}
+                  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                  <nav>
+                  <NavLink exact to='/login' onClick={this.handleLogout}>LOG OUT?</NavLink>
+                </nav></span>
+
+              </div>
+              :
+              <div>
+                <nav>
+                  <NavLink to='/login'>LOG IN</NavLink>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <NavLink to='/signup'>SIGN UP</NavLink>
+                </nav>
+              </div>
+          }
+          
+          {this.state.user && this.state.user.isAdmin ?
+            <div>
+              <nav>
+                <NavLink exact to='/add'>
+                  Add Class
+                </NavLink>
+              </nav>
+            </div>
+            :
+            <div>
+              <nav>
+                <NavLink exact to='/'> 
+                  Book a Class
+                </NavLink>
+                <NavLink exact to='/'>
+                  My Profile
+                </NavLink>
+              </nav>
+            </div>
+          }
+
         </header>
         <main>
           <Route 
-            exact 
-            path='/' 
-            render={() => 
+            exact path='/' render={() => 
               <ClassListPage
                 yogaClasses={this.state.yogaClasses}
                 handleDeleteClass={this.handleDeleteClass}
+                handleLogout={this.handleLogout}
+                user={this.state.user} 
               />
             } 
           />
@@ -97,6 +141,19 @@ class App extends Component {
               location={location}
             />
           } />
+          <Route exact path='/login' render={({history}) => 
+            <LoginPage
+              history={history}
+              handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          } />
+          <Route exact path='/signup' render={({history}) => 
+            <SignupPage
+              history={history}
+              handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          } />
+          
         </main>
       </div>
     );

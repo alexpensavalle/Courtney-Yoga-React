@@ -24,8 +24,8 @@ class SignupForm extends Component {
     try {
       await userService.signup(this.state);
       // Let <App> know a user has signed up!
-      this.props.handleSignupOrLogin();
-      // Successfully signed up - show GamePage
+      this.props.handleSignupOrLogin(); 
+      // Successfully signed up - show main page
       this.props.history.push('/');
     } catch (err) {
       // Invalid user data (probably duplicate email)
@@ -41,6 +41,7 @@ class SignupForm extends Component {
     return (
       <div>
         <header className="header-footer">Sign Up</header>
+        <br></br>
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <div className="form-group">
             <div className="col-sm-12">
@@ -72,6 +73,6 @@ class SignupForm extends Component {
       </div>
     );
   }
-}
+} 
 
 export default SignupForm;

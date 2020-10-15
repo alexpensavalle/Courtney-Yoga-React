@@ -1,14 +1,15 @@
-const User = require('../models/user');
+const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login
+  login,
+  book
 };
 
 async function signup(req, res) {
-  const user = new User(req.body);
+  const user = new User(req.body); 
   try {
     await user.save();
     const token = createJWT(user);
@@ -33,6 +34,17 @@ async function login(req, res) {
     });
   } catch (err) {
     return res.status(401).json(err);
+  }
+}
+
+async function book(req, res) {
+  const user = new User(req.body); 
+  try {
+    await user.save();
+    user.signups.push();
+  } catch (err) {
+    // Probably a duplicate email
+    res.status(400).json(err);
   }
 }
 

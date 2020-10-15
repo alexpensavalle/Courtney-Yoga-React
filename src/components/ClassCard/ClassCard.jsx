@@ -41,7 +41,9 @@ function ClassCard({yogaClass}) {
       </div>
       <div className='panel-footer'>
         <Link to='/'>RETURN TO LIST</Link>
+        <Link to='/book'>BOOK CLASS</Link>
       </div>
+      
     </div>
   );
 }

@@ -5,14 +5,18 @@ const BASE_URL = '/api/users/';
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json'}),
+    //headers: new Headers({'Content-Type': 'application/json'}),
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    },
     body: JSON.stringify(user)
   })
   .then(res => {
     if (res.ok) return res.json();
     // Probably a duplicate email
-    throw new Error('Email already taken!');
-  })
+    //throw new Error('Email already taken!');
+  }) 
   // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));
   // The above could have been written as
