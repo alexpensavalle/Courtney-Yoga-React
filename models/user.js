@@ -12,7 +12,7 @@ const userSchema = new Schema({
     type: Boolean,
     default: 'false'
   },
-  signups: [{type: Schema.Types.ObjectId, href:'User'}]
+  signups: [{type: Schema.Types.ObjectId, ref:'YogaClass'}]
 }, 
 
 {timestamps: true}

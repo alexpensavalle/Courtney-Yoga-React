@@ -3,7 +3,12 @@ import {Link} from 'react-router-dom';
 import './ClassCard.css';
 var moment = require('moment');
 
-function ClassCard({yogaClass}) { 
+
+function ClassCard(props) { 
+
+  const yogaClass = props.yogaClass;
+  //const user = props.user;
+
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
@@ -28,7 +33,7 @@ function ClassCard({yogaClass}) {
           </div>
           
           <div className='inline' >
-            <dt>Class Size:&nbsp;</dt>
+            <dt>Spots Remaining:&nbsp;</dt>
             <dd>{yogaClass.yogaClassSize}</dd>
           </div>
           
@@ -41,7 +46,12 @@ function ClassCard({yogaClass}) {
       </div>
       <div className='panel-footer'>
         <Link to='/'>RETURN TO LIST</Link>
-        <Link to='/book'>BOOK CLASS</Link>
+
+        <button
+            onClick={() => props.handleBookClass(yogaClass._id)}
+          >
+            BOOK CLASS
+          </button> 
       </div>
       
     </div>

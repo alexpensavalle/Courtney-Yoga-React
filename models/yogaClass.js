@@ -9,7 +9,7 @@ const YogaClassSchema = new Schema({
   description: {type: String},
   user: {type: Schema.Types.ObjectId, ref:'User'},
   yogaClassSize: {type: Number},
-  students: [{type: Schema.Types.ObjectId, ref:'User'}]
+  students: [{type: Schema.Types.ObjectId, ref:'User'}]//possibly don't need this...doing it on user model instead
 });
 
 module.exports = mongoose.model('Class', YogaClassSchema);

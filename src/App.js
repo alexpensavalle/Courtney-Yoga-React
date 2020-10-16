@@ -3,6 +3,7 @@ import './App.css';
 import {Route, NavLink} from 'react-router-dom';
 // The following imports all named exports attached to yogaClassAPI
 import * as yogaClassAPI from './services/yoga-api';
+import * as userAPI from './services/user-api';
 import ClassListPage from './components/ClassListPage/ClassListPage';
 import AddClassPage from './components/AddClassPage/AddClassPage';
 import ClassDetailPage from './components/ClassDetailPage/ClassDetailPage';
@@ -34,7 +35,7 @@ class App extends Component {
     }),
     // Using cb to wait for state to update before rerouting
     () => this.props.history.push('/'));
-  }//////////////////////
+  }
 
   handleUpdateClass = async updatedYogaClassData => {
     const updatedClass = await yogaClassAPI.update(updatedYogaClassData);
@@ -49,14 +50,6 @@ class App extends Component {
     );
   }
 
-  handleDeleteClass= async id => {
-    await yogaClassAPI.deleteOne(id);
-    this.setState(state => ({
-      // Yay, filter returns a NEW array
-      yogaClasses: state.yogaClasses.filter(p => p._id !== id)
-    }), () => this.props.history.push('/'));
-  }
-
   handleLogout = () => {
     userService.logout();
     this.setState({ user: null });
@@ -65,24 +58,35 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
+
+  handleDeleteClass= async id => {
+    await yogaClassAPI.deleteOne(id);
+    this.setState(state => ({
+      // Yay, filter returns a NEW array
+      yogaClasses: state.yogaClasses.filter(p => p._id !== id)
+    }), () => this.props.history.push('/'));
+  }
+
+  handleBookClass = async id => {
+    await userAPI.bookClass(this.state.user, id);
+
+  }
+  
   
   render() {
     return (
       <div className="App">
         <header className="App-header">
+          
           <NavLink exact to='/home'>Courtney's Yoga</NavLink>
-
-
 
           {this.state.user ?
               <div>
-                
                 <span className="inline">Welcome, {this.state.user.name}
                   &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                   <nav>
                   <NavLink exact to='/login' onClick={this.handleLogout}>LOG OUT?</NavLink>
                 </nav></span>
-
               </div>
               :
               <div>
@@ -114,8 +118,9 @@ class App extends Component {
               </nav>
             </div>
           }
-
+        
         </header>
+        
         <main>
           <Route 
             exact path='/' render={() => 
@@ -129,11 +134,15 @@ class App extends Component {
           />
           <Route exact path='/add' render={() => 
             <AddClassPage
-              handleAddClass={this.handleAddClass}
+                handleAddClass={this.handleAddClass}
             />
           } />
           <Route exact path='/details' render={({location}) => 
-            <ClassDetailPage location={location}/>
+            <ClassDetailPage 
+                handleBookClass={this.handleBookClass}
+                user={this.state.user} 
+                location={location}
+            />
           } />
           <Route exact path='/edit' render={({location}) => 
             <EditClassPage

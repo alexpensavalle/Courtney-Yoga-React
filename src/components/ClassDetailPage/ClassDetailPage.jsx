@@ -10,6 +10,8 @@ function ClassDetailPage(props) {
      <ClassCard
        key={yogaClass._id}
        yogaClass={yogaClass}
+       user={props.user}
+       handleBookClass={props.handleBookClass}
      />
    </>
  );

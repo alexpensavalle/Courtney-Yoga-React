@@ -21,26 +21,35 @@ function ClassListItem(props) {
             className='btn btn-xs btn-info'
             to={{
               pathname: '/details',
-              state: {yogaClass: props.yogaClass}
+              state: {
+                yogaClass: props.yogaClass,
+                user: props.user,
+                handleBookClass: props.handleBookClass
+              }
             }}
           >
             DETAILS
           </Link>
+          
           <Link
             className='btn btn-xs btn-warning'
             to={{
               pathname: '/edit',
-              state: {yogaClass: props.yogaClass}
+              state: {
+                yogaClass: props.yogaClass
+              }
             }}
             >
             EDIT
           </Link>
+          
           <button
             className="btn btn-xs btn-danger margin-left-10"
             onClick={() => props.handleDeleteClass(props.yogaClass._id)}
           >
             DELETE
           </button>
+
         </div> 
         :
         <div>
@@ -48,7 +57,11 @@ function ClassListItem(props) {
           className='btn btn-xs btn-info centered'
           to={{
             pathname: '/details',
-            state: {yogaClass: props.yogaClass}
+            state: {
+              yogaClass: props.yogaClass,
+              user: props.user,
+              handleBookClass: props.handleBookClass
+            }
           }}
         >
           DETAILS
