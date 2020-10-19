@@ -4,16 +4,17 @@
   grid-template-rows: 7vmin auto;
 }
 .App-header {
-  background-color: var(--black);
+  background-color: #ffefef;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 2vmin;
   font-size: 2.5vmin;
   color: var(--background);
+  /*height: 150px;*/
 }
 .App main {
-  background-color: var(--background);
+  background-color: #EFF8FE;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -28,4 +29,39 @@
   display: inline-block;
   justify-content: flex-start;
   padding: 10px;
+  color: var(--secondary-dark);
+
+}
+
+a.active{
+  background-color: #ffffff;
+  color: var(--secondary-dark);
+}
+
+a:hover {
+  color: #31B0D5;
+  background-color: #f4cccc;
+}
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+:root {
+  --pink:#f4e6e6;
+  --secondary-dark: #31B0D5;
+  --background: var(--pink);
+  --accent:var(--secondary-dark);
+  
+}
+
+.right {
+  margin-left: 10px;
+}
+
+.panel-footer {
+  display: flex;
+  justify-content: space-evenly;
 }

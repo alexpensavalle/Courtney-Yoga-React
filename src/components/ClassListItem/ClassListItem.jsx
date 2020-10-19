@@ -24,7 +24,9 @@ function ClassListItem(props) {
               state: {
                 yogaClass: props.yogaClass,
                 user: props.user,
-                handleBookClass: props.handleBookClass
+                handleBookClass: props.handleBookClass,
+                handleShowProfile: props.handleShowProfile,
+                handleSignupOrLogin: props.handleSignupOrLogin
               }
             }}
           >
@@ -36,7 +38,9 @@ function ClassListItem(props) {
             to={{
               pathname: '/edit',
               state: {
-                yogaClass: props.yogaClass
+                yogaClass: props.yogaClass,
+                user: props.user,
+                handleShowProfile: props.handleShowProfile
               }
             }}
             >
@@ -51,7 +55,7 @@ function ClassListItem(props) {
           </button>
 
         </div> 
-        :
+        : 
         <div>
           <Link
           className='btn btn-xs btn-info centered'
@@ -60,13 +64,14 @@ function ClassListItem(props) {
             state: {
               yogaClass: props.yogaClass,
               user: props.user,
-              handleBookClass: props.handleBookClass
+              handleBookClass: props.handleBookClass,
+              handleShowProfile: props.handleShowProfile,
             }
           }}
         >
           DETAILS
         </Link>
-        </div>
+        </div> 
       }
 
         

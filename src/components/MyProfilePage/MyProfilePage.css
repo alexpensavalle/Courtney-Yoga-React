@@ -6,4 +6,8 @@
     align-items: center;
   }
 
+  .margin-bottom {
+    margin-bottom: 100px;
+}
+
   /* going to be almost identical to ClassListPage */

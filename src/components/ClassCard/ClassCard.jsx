@@ -7,7 +7,7 @@ var moment = require('moment');
 function ClassCard(props) { 
 
   const yogaClass = props.yogaClass;
-  //const user = props.user;
+  const user = props.user;
 
   return (
     <div className='panel panel-default'>
@@ -46,12 +46,23 @@ function ClassCard(props) {
       </div>
       <div className='panel-footer'>
         <Link to='/'>RETURN TO LIST</Link>
-
+        
+        
+        {props.user.signups.includes(yogaClass._id) ?
+        <Link to='/profile'>ALREADY BOOKED</Link>
+        :
+        props.user ?
         <button
             onClick={() => props.handleBookClass(yogaClass._id)}
           >
-            BOOK CLASS
-          </button> 
+            BOOK CLASS 
+        </button> 
+        :
+        <Link to='/login'>LOG IN TO BOOK</Link>
+        }
+
+
+
       </div>
       
     </div>

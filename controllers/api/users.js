@@ -1,11 +1,13 @@
 const User = require('../../models/user');
+const Class = require('../../models/yogaClass');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
   login,
-  bookClass
+  bookClass,
+  showSelectedClasses
 };
 
 async function signup(req, res) {
@@ -44,12 +46,30 @@ async function bookClass(req, res) {
   if(!(user.signups.includes(req.body.classID))) { //ONLY IF that ID is NOT already in signups array
     user.signups.push(req.body.classID);//add yogaClasses ID to users signup array 
   }
-  else console.log("Class Already Selected");
+  else {
+    console.log("CLASS ALREADY SELECTED");
+    return res.status(401).json({err: 'Class Already Selected!'});
+ }
   
   user.save();
   
   /*if (!user) return res.status(401).json({err: 'Please log in or sign up'});*/
   return res.status(201).json(user);
+}
+
+async function showSelectedClasses(req, res) {
+  
+  console.log(req);
+
+  const user = await User.findById(req.body.user._id);
+
+  if(user.signups.includes(req.body.classID)) {
+    const yogaClass = await Class.findById(req.body.classID);
+    res.status(200).json(yogaClass);
+  }
+  else {
+     console.log("If statement not working");
+  }
 }
 
 /*----- Helper Functions -----*/

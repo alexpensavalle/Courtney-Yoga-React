@@ -10,6 +10,7 @@ import ClassDetailPage from './components/ClassDetailPage/ClassDetailPage';
 import EditClassPage from './components/EditClassPage/EditClassPage';
 import SignupPage from './pages/SignupPage/SignupPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import MyProfilePage from './components/MyProfilePage/MyProfilePage.jsx'
 import userService from './utils/userService';
 
 class App extends Component {
@@ -69,7 +70,10 @@ class App extends Component {
 
   handleBookClass = async id => {
     await userAPI.bookClass(this.state.user, id);
+  }
 
+  handleShowProfile = async id => {
+    await userAPI.showSelectedClasses(this.state.user, id);
   }
   
   
@@ -78,22 +82,22 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           
-          <NavLink exact to='/home'>Courtney's Yoga</NavLink>
+          <NavLink exact to='/'>Courtney's Virtual Yoga Classes </NavLink>
 
           {this.state.user ?
               <div>
                 <span className="inline">Welcome, {this.state.user.name}
                   &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                   <nav>
-                  <NavLink exact to='/login' onClick={this.handleLogout}>LOG OUT?</NavLink>
+                  <NavLink className="NavLink right" exact to='/login' onClick={this.handleLogout}>LOG OUT?</NavLink>
                 </nav></span>
               </div>
               :
               <div>
                 <nav>
-                  <NavLink to='/login'>LOG IN</NavLink>
+                  <NavLink className="NavLink btn"to='/login'>LOG IN</NavLink>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <NavLink to='/signup'>SIGN UP</NavLink>
+                  <NavLink className="btn" to='/signup'>SIGN UP</NavLink>
                 </nav>
               </div>
           }
@@ -101,7 +105,10 @@ class App extends Component {
           {this.state.user && this.state.user.isAdmin ?
             <div>
               <nav>
-                <NavLink exact to='/add'>
+              <NavLink className="NavLink right"  exact to='/'> 
+                  Class List
+                </NavLink>
+                <NavLink className="NavLink" exact to='/add'>
                   Add Class
                 </NavLink>
               </nav>
@@ -109,10 +116,10 @@ class App extends Component {
             :
             <div>
               <nav>
-                <NavLink exact to='/'> 
+                <NavLink className="NavLink right"  exact to='/'> 
                   Book a Class
                 </NavLink>
-                <NavLink exact to='/'>
+                <NavLink className="NavLink right" exact to='/profile'>
                   My Profile
                 </NavLink>
               </nav>
@@ -160,6 +167,14 @@ class App extends Component {
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          } />
+          <Route exact path='/profile' render={({history}) => 
+            <MyProfilePage
+              history={history}
+              handleShowProfile={this.handleShowProfile}
+              yogaClasses={this.state.yogaClasses}
+              user={this.state.user} 
             />
           } />
           
