@@ -48,7 +48,7 @@ function ClassCard(props) {
         <Link to='/'>RETURN TO LIST</Link>
         
         
-        {props.user.signups.includes(yogaClass._id) ?
+        {props.user && props.user.signups.includes(yogaClass._id) ?
         <Link to='/profile'>ALREADY BOOKED</Link>
         :
         props.user ?
